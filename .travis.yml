@@ -1,0 +1,26 @@
+language: node_js
+node_js:
+- '0.12'
+- iojs
+matrix:
+  allow_failures:
+  - node_js: iojs
+before_install:
+- npm install npm@latest
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+after_script:
+- npm run test:coverage
+cache:
+  directories:
+  - node_modules
+deploy:
+  provider: npm
+  email: k88hudson@gmail.com
+  api_key:
+    secure: VygM5nn6s35J1LJAjdN0gZQYeMgRgj0Uuh18/aXdcEthhfkKY70fvqP8R7W57ForPObYcUqLf1qnWdz8db7do7tMWtKpgLWVDsaFkb6F+Qm6kdNV0Re0EFAylcIdoItktIB8L8Xv12J3Y03Dkcy5PBMgKkPlYgmkvPO2HwY0F1UTMsPM8vJmiO84M5Dy2SX2r0h2oqXxcchaW6evvesI6DLUMqWklirOuF2dG2fTYGpTbLgolFFz59tl2mQU/Qkm4Y9ud3KY7D6Qo/uIKLQlgwaficKZW7RlvPqcRg5JCS+kmv+8lX/rDg//z3WlhfY9ycNe8pl+pgMjklCdx+HFSSBPHFtgbbo2bFPYnQD53PNes5w3gdKH4XO0eFLzVk3SGbe2kfgBU2mwpQr9aaF31QAQJmLnRQd40BeDB9CUXmRtCYDsM0ys338GSHlLqVNvmDuRh+A46xXve5FUReIaK7+M/REom2ZO66CgaiZuz9eh48LR61FWGzM/d+8BPYVwFT6F1wqayHWWaelCacI3JkXAxJFin47+uMoLBl6jNbdb5vww30IHumqjFnxCWE90r/TwYufOihhrE5uqLzq74BzrYe6G+q07grOp+VXXFk1yHrzG66hGIo5IXEvOuE6Z36bp6I7VCaLeuzJme6kw5KUDf7N+bnbSW1MKbldWJ8w=
+  skip_cleanup: true
+  on:
+    tags: true
+    all_branches: true
+    repo: k88hudson/react-formation
